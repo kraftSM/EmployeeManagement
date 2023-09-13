@@ -11,7 +11,7 @@ using EmployeeManagement.Models;
 
 namespace EmployeeManagement.ViewModels
 {
-    class EmployeesViewModel:INotifyPropertyChanged              
+    class EmployeesViewModel: INotifyPropertyChanged, IEmployeesViewModel
     {
         private EmployeeRepository _employeeRepository { get; }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -85,18 +85,19 @@ namespace EmployeeManagement.ViewModels
         {
             if (!String.IsNullOrEmpty(_filter))
             {
-                _employees = new ObservableCollection<Employee>(
+                Employees = new ObservableCollection<Employee>(
                   _employeeRepository.GetAll()
                   .Where(v => v.FirstName.Contains(_filter)));
             }
             else
             {
-                _employees = new ObservableCollection<Employee>(
+                Employees = new ObservableCollection<Employee>(
                   _employeeRepository.GetAll());
             }
         }
         //public ObservableCollection<Employee> Employees
-        //{ get 
+        //{
+        //    get
         //    {
         //        return new ObservableCollection<Employee>
         //            (this._employeeRepository.GetAll());
